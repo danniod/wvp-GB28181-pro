@@ -9,7 +9,7 @@ spring:
     # REDIS数据库配置
     redis:
         # [必须修改] Redis服务器IP, REDIS安装在本机的,使用127.0.0.1
-        host: ${REDIS_HOST:172.17.170.255}
+        host: ${REDIS_HOST:192.168.2.207}
         # [必须修改] 端口号
         port: ${REDIS_PORT:6379}
         # [可选] 数据库 DB
@@ -26,9 +26,9 @@ spring:
                 master:
                     type: com.zaxxer.hikari.HikariDataSource
                     driver-class-name: com.mysql.cj.jdbc.Driver
-                    url: jdbc:mysql://172.17.170.255:3306/wvp2?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&serverTimezone=PRC&useSSL=false&allowMultiQueries=true
+                    url: jdbc:mysql://192.168.2.207:3306/wvp2?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&serverTimezone=PRC&useSSL=false&allowMultiQueries=true
                     username: root
-                    password: root
+                    password: sfkj@huawei@123
                     hikari:
                         connection-timeout: 20000             # 是客户端等待连接池连接的最大毫秒数
                         initialSize: 50                       # 连接池初始化连接数
