@@ -32,16 +32,16 @@ RUN cd /home/wvp-pro-assist && \
         cp /home/wvp-pro-assist/target/*.jar /opt/assist/ && \
         cp /home/wvp-pro-assist/src/main/resources/application-dev.yml /opt/assist/config/application.yml
 
-RUN cd /home && \
-        git clone --depth=1 "${zlmGitUrl}"
-RUN cd /home/ZLMediaKit && \
-        git submodule update --init --recursive && \
-        mkdir -p build release/linux/Release/ &&\
-        cd build && \
-        cmake -DCMAKE_BUILD_TYPE=Release .. && \
-        make -j4 && \
-        rm -rf ../release/linux/Release/config.ini && \
-        cp -r ../release/linux/Release/* /opt/media
+# RUN cd /home && \
+#         git clone --depth=1 "${zlmGitUrl}"
+# RUN cd /home/ZLMediaKit && \
+#         git submodule update --init --recursive && \
+#         mkdir -p build release/linux/Release/ &&\
+#         cd build && \
+#         cmake -DCMAKE_BUILD_TYPE=Release .. && \
+#         make -j4 && \
+#         rm -rf ../release/linux/Release/config.ini && \
+#         cp -r ../release/linux/Release/* /opt/media
 
 RUN cd /opt/wvp && \
         echo '#!/bin/bash' > run.sh && \
@@ -49,7 +49,7 @@ RUN cd /opt/wvp && \
         echo 'echo ${WVP_CONFIG}' >> run.sh && \
         echo 'cd /opt/assist' >> run.sh && \
         echo 'nohup java ${ASSIST_JVM_CONFIG} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/assist/heapdump/ -jar *.jar --spring.config.location=/opt/assist/config/application.yml --userSettings.record=/opt/media/www/record/  --media.record-assist-port=18081 ${ASSIST_CONFIG} &' >> run.sh && \
-        echo 'nohup /opt/media/MediaServer -d -m 3 &' >> run.sh && \
+        # echo 'nohup /opt/media/MediaServer -d -m 3 &' >> run.sh && \
         echo 'cd /opt/wvp' >> run.sh && \
         echo 'java ${WVP_JVM_CONFIG} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/wvp/heapdump/ -jar *.jar --spring.config.location=/opt/wvp/config/application.yml --media.record-assist-port=18081 ${WVP_CONFIG}' >> run.sh && \
         chmod +x run.sh
@@ -59,14 +59,14 @@ FROM ubuntu:20.04
 EXPOSE 18080/tcp
 EXPOSE 5060/tcp
 EXPOSE 5060/udp
-EXPOSE 6379/tcp
+# EXPOSE 6379/tcp
 EXPOSE 18081/tcp
-EXPOSE 80/tcp
-EXPOSE 1935/tcp
-EXPOSE 554/tcp
-EXPOSE 554/udp
-EXPOSE 30000-30500/tcp
-EXPOSE 30000-30500/udp
+# EXPOSE 80/tcp
+# EXPOSE 1935/tcp
+# EXPOSE 554/tcp
+# EXPOSE 554/udp
+# EXPOSE 30000-30500/tcp
+# EXPOSE 30000-30500/udp
 
 ENV LC_ALL zh_CN.UTF-8
 
